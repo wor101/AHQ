@@ -2,6 +2,7 @@ require 'pry'
 
 module Display
   SCREEN_SIZE = 40
+  HALF_SCREEN = 20
   def clear
     system 'clear'
   end
@@ -46,9 +47,40 @@ class Character < Creature
   def show
     clear
     display_title(name)
-    puts ("#{ancestory} " + "#{character_class}").center(SCREEN_SIZE) 
+    puts "Ancestory: #{ancestory}".ljust(HALF_SCREEN) + "Class: #{character_class}".ljust(HALF_SCREEN)
+    puts ""
+    puts "start  current".center(HALF_SCREEN) + "start  current".center(HALF_SCREEN)
+    puts "Weapon Skill".center(HALF_SCREEN) + "Speed".center(HALF_SCREEN)
+    puts display_ability(weapon_skill) + display_ability(speed)
+    puts "Bow Skill".center(HALF_SCREEN) + "Bravery".center(HALF_SCREEN)
+    puts display_ability(bow_skill) + display_ability(bravery)
+    puts "Strength".center(HALF_SCREEN) + "Intelligence".center(HALF_SCREEN)
+    puts display_ability(strength) + display_ability(intelligence)
+    puts "Toughness".center(HALF_SCREEN) + "Fate".center(HALF_SCREEN)
+    puts display_ability(toughness) + display_ability(fate)
+    puts "Wounds".center(HALF_SCREEN)
+    puts display_ability(wounds)
+    puts ""
+    puts "Weapons:"
+    puts display_equipment(weapons)
+    puts ""
+    puts "Armour:"
+    puts display_equipment(armour)
+    puts ""
+    puts "Equipment:"
+    puts display_equipment(equipment)
   end
-
+  
+  private
+  
+  def display_ability(ability)
+    "[#{ability[0]}]    [#{ability[1]}]".center(HALF_SCREEN)
+  end
+  
+  def display_equipment(items)
+    return "none" if !items
+    items
+  end
 end
 
 module CharacterCreation
@@ -92,14 +124,47 @@ module CharacterSelection
   def load_character(selection)
     self.character = Character.new(selection)
     character.show
+    gets.chomp
+  end
+end
 
+class Board
+  SIZE = 20
+  
+  attr_accessor :board
+  attr_reader :create_corridor
+  
+  
+  def initialize
+    @board = create_board
+    @corridor = create_corridor
+  end
+  
+  def create_board
+    board_array = Array.new(SIZE)
+    board_array.map { |row| Array.new(SIZE) }
+  end
+  
+  def create_corridor
+ 
+    "|    |    |\n" + 
+    "-----------\n" + 
+    "|    |    |\n" + 
+    "-----------\n" + 
+    "|    |    |\n" + 
+    "-----------\n" + 
+    "|    |    |\n" + 
+    "-----------\n" +
+    "|    |    |\n" 
+
+  end
+  
+  def create_t_junction
+    
   end
   
   
 end
-
-
-
 
 class AdvancedHeroQuest
   require 'yaml'
@@ -111,7 +176,6 @@ class AdvancedHeroQuest
   
   def play
     greeting
-    #create_character
     begin_adventure
       loop do
         hero_phase
@@ -170,5 +234,8 @@ class AdvancedHeroQuest
   end
 end
 
-game = AdvancedHeroQuest.new
-game.play
+# game = AdvancedHeroQuest.new
+# game.play
+
+dungeon = Board.new
+puts dungeon.create_corridor
