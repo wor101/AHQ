@@ -1,0 +1,38 @@
+microservices:
+  - app: user-authentication
+    port: 9000
+    version: 1.7
+    deployed: true
+  - app: shopping-cart
+    port: 9002
+    version: [1.9, 2.0, 2.4]
+  
+  #many online YAML  onlineyamltools.com to validate
+  
+  
+  # character YAML file
+
+Character:
+  name: &name "Morgar"
+  class: 'Warrior'
+  weapon_skill: 5
+  wizard: false
+  spells: null
+  equipment:
+    - torch
+    - rope
+    - backpack
+  weapons: [axe, dagger]
+  followers:
+    - name: "TookTook"
+      ancestory: "goblin"
+    - {name: "Theon", ancestory: "human" }
+  description: >
+    A whole lot of text that doesn't really matter. 
+    I included the > key above to tell YAML to render 
+    it as a single line which is pretty awesome if you 
+    ask me. None of this formating is preserved.
+  history: |
+    The vertical bar above tells YAML to preserve my formating.
+    This means each line will appear as written here.
+    Yay!

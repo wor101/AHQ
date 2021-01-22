@@ -1,0 +1,44 @@
+1:
+  name: Magnus the Bright
+  ancestory: Human
+  character_class: Wizard
+  weapon_skill: [5, 5]
+  bow_skill: [6, 6]
+  strength: [4, 4]
+  toughess: [4, 4]
+  speed: [8, 8]
+  bravery: [9, 9]
+  intelligence: [9, 9]
+  fate: [2, 2]
+  wounds: [3, 3]
+  weapons: dagger
+  armour: null
+  spells: null
+  equipment:
+    - Bright Wizard's Spell Book
+    - [Spell component, Spell component, Spell component, Spell component]
+    - 10ft Rope
+    - Iron Spikes
+
+2:
+  name: Heinrich Lowen
+  ancestory: Human
+  character_class: Warrior
+  weapon_skill: [5, 5]
+  bow_skill: [6, 6]
+  strength: [4, 4]
+  toughess: [4, 4]
+  speed: [8, 8]
+  bravery: [9, 9]
+  intelligence: [9, 9]
+  fate: [2, 2]
+  wounds: [3, 3]
+  weapons: dagger
+  armour: null
+  spells: null
+  equipment:
+    - Bright Wizard's Spell Book
+    - [Spell component, Spell component, Spell component, Spell component]
+    - 10ft Rope
+    - Iron Spikes
+
