@@ -130,19 +130,49 @@ end
 
 class Board
   SIZE = 20
+  DEFAULT = [[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+            ]
   
-  attr_accessor :board
-  attr_reader :create_corridor
+  attr_accessor :board, :player_position
+  attr_reader :create_corridor, :player_marker
   
   
   def initialize
-    @board = create_board
+    @player_marker = 'P'
+    @player_position = [9, 4]
+    @board = DEFAULT
     @corridor = create_corridor
+    
+    
   end
   
-  def create_board
-    board_array = Array.new(SIZE)
-    board_array.map { |row| Array.new(SIZE) }
+  def set_board
+    place_marker(player_position, player_marker)
+  end
+
+  # def board=[]([y_axis, x_axis], value)
+  #   @board[y_axis][x_axis] = value
+  # end
+
+  def place_marker(coordinates, marker)
+    @board[coordinates[0]][coordinates[1]] = marker
+  end
+
+  def move_marker_north(coordinates, marker)
+    y_axis = coordinates[0]
+    x_axis = coordinates[1]
+
+    coordinates = [(y_axis - 1), x_axis]
+    place_marker(coordinates, marker)
   end
   
   def create_corridor
@@ -192,8 +222,6 @@ class AdvancedHeroQuest
   attr_reader :titles
   attr_accessor :character
   
-
-  
   def greeting
     display_title(titles['welcome'])
     puts "1. Select Character".center(SCREEN_SIZE)
@@ -238,4 +266,8 @@ end
 # game.play
 
 dungeon = Board.new
-puts dungeon.create_corridor
+dungeon.set_board
+p dungeon.player_position
+p dungeon.player_marker
+dungeon.move_marker_north(dungeon.player_position, dungeon.player_marker)
+dungeon.board.each { |line| puts line.join }
